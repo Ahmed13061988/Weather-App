@@ -14,8 +14,6 @@ def home():
 def about(station, date):
     df = pd.read_csv(f"data_small/TG_STAID" + str(station).zfill(6) + ".txt", skiprows=20, parse_dates=["    DATE"])
     df["TG0"] = df['   TG'].mask(df["   TG"] == -9999, np.nan)
-    # station = df["STAID"].to_json
-    # date = df.loc[df["    DATE"] == date]["    DATE"]
     temperature = df.loc[df["    DATE"] == date]["TG0"].squeeze() / 10
     print(temperature)
     return {"station": station,
