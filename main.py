@@ -4,10 +4,17 @@ import numpy as np
 
 web_page = Flask(__name__)
 
+variable = "Hello World"
+
+
+stations = pd.read_csv("data_small/stations.txt", skiprows=17)
+
+stations = stations[["STAID", "STANAME                                 "]]
+
 
 @web_page.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("home.html", data=stations.to_html())
 
 
 @web_page.route("/api/v1/<station>/<date>")
